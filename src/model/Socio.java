@@ -1,11 +1,8 @@
 package model;
 
-import java.util.ArrayList;
-
 public class Socio {
 
 	private String nome, localidade, contacto;
-	private ArrayList<Rendimento> rend;
 
 	public Socio(String nome, String localidade, String contacto) {
 		this.nome = nome;
@@ -37,14 +34,6 @@ public class Socio {
 		this.contacto = contacto;
 	}
 	
-	public ArrayList<Rendimento> getRend() {
-		return rend;
-	}
-
-	public void setRend(ArrayList<Rendimento> rend) {
-		this.rend = rend;
-	}
-
 	public String toString(){
 		return "\n Nome: " + getNome()
 				+ "\n Localidade: " + getLocalidade()

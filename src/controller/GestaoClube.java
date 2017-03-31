@@ -1,49 +1,45 @@
 package controller;
 
-import database.MockupData;
-import model.Rendimento;
+import java.util.ArrayList;
+import java.util.function.Consumer;
+
+import model.Receita;
 import model.Socio;
 
 public class GestaoClube {
 
-	MockupData db = new MockupData();
+	ArrayList<Receita> lR;
 	
-	public void addSocio(String nome, String local, String tlm){
-		
-		db.socio.add(new Socio(nome,local,tlm));
-		
+	public GestaoClube(ArrayList<Receita> arReceitas) {
+		this.lR = arReceitas;
+	}
+
+	public GestaoClube(){
+		this.lR = new ArrayList<>();
+	}
+
+	public ArrayList<Receita> getArReceitas() {
+		return lR;
+	}
+
+	public void setArReceitas(ArrayList<Receita> arReceitas) {
+		this.lR = arReceitas;
 	}
 	
-	public void print(){
+	public Socio topS(){
 		
-		int i=0;
+		Socio s = lR.get(0).getSocio();
+		double qt = lR.get(0).getPreco();
 		
-		for(Socio o : db.socio){
-			System.out.println(o.toString());
-			if(o.getRend().get(i).getTipo() != 1){
-				System.out.println(" " + o.getRend().get(i).toString());
-			}
-			i++;
-		}
-	}
-	
-	public void addDonativo(int id, int tipo,float preco, int mes){
-		
-		Rendimento e = new Rendimento(preco, tipo, mes);
-		
-		db.socio.get(id).getRend().add(e);
-	}
-	
-	public void DarMais(){
-		
-		int id=0;
-		float preco=0;
-		
-		for(Socio o : db.socio){
-			if(o.getRend().get(id).getPreco() > preco){
-				
+		for(Receita rc : this.lR){
+			if(qt > rc.getPreco()){
+				qt = rc.getPreco();
+				s = rc.getSocio();
 			}
 		}
+		
+		return s;
+		
 	}
 	
 }
